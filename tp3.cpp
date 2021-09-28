@@ -1,3 +1,11 @@
+/*
+##############################################################
+fichier des fonction(tp3.cpp) du menu
+creer par oscar jundt-schmitter
+etudiant en BTS SNIR
+##############################################################
+*/
+
 #include <iostream>
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -77,7 +85,7 @@ void ini0() {
 	char bg = 192;
 	string to = "";
 	string to2 = "";
-	string grr[4] = { "Menu","tp1","tp2","fin"};
+	string grr[5] = { "Menu","tp1","tp2","tp3","fin"};
 	string to22 = "";
 	to22 = vert;
 	textcolor(GREEN);
@@ -100,7 +108,10 @@ void ini0() {
 			break;
 		case 4: cout << "|          " << grr[3] << endl;
 			break;
+		case 5:cout << "|          " << grr[4] << endl;
+			break;
 		}
+		
 
 	}
 	cout << to2;
@@ -187,6 +198,51 @@ void ini2() {
 	gotoxy(11, 5);
 }
 
+
+
+void ini3() {
+	clrscr();
+	char vert = 179;
+	char hor = 196;
+	char hd = 191;
+	char hg = 218;
+	char bd = 217;
+	char bg = 192;
+	string to = "";
+	string to2 = "";
+	string grr[5] = { "Tp3","surface","calcule","calculev2", "retour" };
+	string to22 = "";
+	to22 = vert;
+	textcolor(GREEN);
+	for (int i = 0; i < 110; i++) {
+		to = to + hor;
+		to2 = to2 + hor;
+		to22 = to22 + " ";
+	}
+	to22 = to22 + vert;
+	cout << to;
+	for (int i2 = 0; i2 < 15; i2++) {
+		cout << to22 << endl;
+		switch (i2)
+		{
+		case 1: cout << "|                                                " << grr[0] << endl;
+			break;
+		case 2: cout << "|          " << grr[1] << endl;
+			break;
+		case 3: cout << "|          " << grr[2] << endl;
+			break;
+		case 4: cout << "|          " << grr[3] << endl;
+			break;
+		case 5: cout << "|          " << grr[4] << endl;
+
+		}
+	}
+		cout << to2;
+		gotoxy(11, 5);
+}
+
+
+
 /// @brief caclule la somme de 2 nombre
 /// @param x nombre donner par l'utilisateur
 /// @param y nombre donner par l'utilisateur
@@ -240,7 +296,6 @@ void calcule() {
 	resultat4 = div(float(nb1), float(nb2));
 	affichage(resultat, resultat2, resultat3, resultat4);
 }
-
 void nbmonnais() {
 	float tab2[8] = { 1,2,5,10,20,50,100,200 };
 	int tab[8];
@@ -253,6 +308,7 @@ void nbmonnais() {
 		res = res + tab[i2] * tab2[i2];
 	}
 	cout << res / 100 << endl;
+	system("pause");
 }
 
 /// @brief fonction du polinom du second degrer
@@ -290,4 +346,77 @@ void polinom() {
 		}
 	}
 }
+/// @brief fonction qui calcule la surface et le volume
+/// @param Rayons variable donner par l'utilisateur
+/// @param Surf resultat du calcule de la surface
+/// @param Vol resultat du calcule du volume
+/// @return null
+float CalculeSurface(float Rayons, float *Surf, float *Vol) {
+	*Surf = M_PI * (Rayons * Rayons);
+	*Vol = (4 / 3) * M_PI * pow(Rayons,3);
+	return 0;
+}
 
+/// @brief fonction principale du calcule de la surface
+void Surface() {
+	int Rayons;
+	cout << "donner rayons: ";
+	cin >> Rayons;
+	float Surf;
+	float* pointeurS=&Surf;
+	float Vol;
+	float* pointeurV = &Vol;
+	CalculeSurface(Rayons,pointeurS,pointeurV);
+	cout <<"surface=" << Surf << ";" <<"volume=" << Vol << endl;
+	system("pause");
+}
+
+/// @brief fonction qui calcule la monnais
+/// @param tab 
+/// @param tab2 
+/// @return le total d'argent
+float calculemonnais(float* tab, int* tab2) {
+	float res = 0;
+	for (int i = 0; i < 8; i++) {
+		res = res + (tab[i] * tab2[i]);
+	}
+	return res/100;
+}
+/// @brief fonction princiaple de calcule de monnais version 2
+void nbmonnais2() {
+	float tab[8] = { 1,2,5,10,20,50,100,200 };
+	int tab2[8];
+	int a;
+	for (int i = 0; i < 8; i++) {
+		cin >> a;
+		tab2[i] = a;
+	}
+	float res2 = calculemonnais(tab, tab2);
+	cout << res2<<endl;
+	system("pause");
+}
+
+/// @brief fait la somme,le produit, la difference de 2 variable
+/// @param nA entier donner par l'utilisateur
+/// @param nB entier donner par l'utilisateur
+/// @param val1 resultat de la somme
+/// @param val2 resultat de la difference
+/// @param val3 resultat du produit
+void CalculeArit(int nA, int nB, int *val1, int *val2, int *val3) {
+	*val1 = nA + nB;
+	*val2 = nA - nB;
+	*val3 = nA * nB;
+}
+
+void calcule2() {
+	int nA;
+	int nB;
+	cin >> nA;
+	cin >> nB;
+	int valadd;
+	int valsous;
+	int valmult;
+	CalculeArit(nA, nB, &valadd, &valsous, &valmult);
+	cout  << valadd << ";" << valsous << ";" << valmult<<endl;
+	system("pause");
+}
